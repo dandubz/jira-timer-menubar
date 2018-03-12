@@ -68,7 +68,12 @@ class SettingsContainer extends Component {
           <Margin bottom={2}>App version v{this.props.version}</Margin>
 
           <FlexContainer>
-            <Button primary onClick={this.onCheckForUpdates}>Check for updates</Button>
+            <div>
+              <Button primary onClick={this.onCheckForUpdates}>Check for updates</Button>
+              {! this.props.canUpdate && (
+                <Margin top={2}>No updates available</Margin>
+              )}
+            </div>
           </FlexContainer>
         </Section>
       </Fragment>
@@ -115,6 +120,7 @@ const mapStateToProps = state => ({
   authToken: state.user.authToken,
   profile: state.user.profile,
   version: state.updater.version,
+  canUpdate: state.updater.canUpdate,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer)

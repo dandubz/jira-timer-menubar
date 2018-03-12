@@ -177,6 +177,9 @@ ipcMain.on('updateStatus', (event) => {
 
   if (process.env.NODE_ENV !== 'development')
     autoUpdater.checkForUpdates()
+  else {
+    mb.window.webContents.send('updateChecking')
+  }
 })
 
 autoUpdater.on('checking-for-update', () => {
